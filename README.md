@@ -1,11 +1,14 @@
-
 # forcing_ssh
-Para iniciar este servicio creado en bash, es necesario usarlo en entorno "Linux", con el cual se verificará una llave ssh tras otra y posterior a ello se probarán las credenciales que se indiquen desde un archivo externo, asimismo cabe destacar que la ejecución del programa crea un archivo temporal ssh en ´/tmp/temp_key.´ para no modificar la ssh_keygen que se pase al inicio.
+
+Este script en Bash está diseñado para realizar un ataque de diccionario sobre una clave SSH en formato RSA que esté protegida con una contraseña. Funciona en entornos Linux y se recomienda su uso en un contexto de pruebas de penetración autorizado.
+
+El script toma una clave SSH RSA específica y prueba cada contraseña de un archivo de wordlist. Para evitar modificar la clave SSH original, el script crea un archivo temporal en `/tmp/temp_key.<PID>`, donde `<PID>` es el ID de proceso, que se elimina automáticamente al finalizar la prueba o si se encuentra la contraseña correcta.
+
 ## Uso
 
-El proyecto no requiere de una instalación directo, sino más bien de tenerlo en nuestra máquina y ejecutar con permisos de "sudo"
+No se requiere una instalación específica para ejecutar el script. Solo necesitas tener el script en tu máquina y ejecutarlo con permisos de `sudo` si es necesario (por ejemplo, cuando la clave SSH tiene restricciones de permisos).
+
+### Comando de Ejecución
 
 ```bash
-  sudo forcing_ssh.sh -w wodlist -d clave_ssh
-```
-    
+sudo forcing_ssh.sh -w <archivo_wordlist> -d <archivo_clave_ssh>
